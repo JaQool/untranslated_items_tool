@@ -21,12 +21,11 @@ outputFilename="/var/www/tripnscan/batch_logs/untranslated_items.json"
 
 echo $result | python -mjson.tool > "${outputFilename}"
 
-foo=$(printf "${outputFilename}" | python google_login.py)
+log_summary=$(printf "${outputFilename}" | python google_login.py)
 
-./slack_post.sh "$foo"
+./slack_post.sh "$log_summary"
 
 
-#./slack_post.sh $foo
 
 #to have the log display with utf-8 decoded
 #output=$(cat ${filename}) 
