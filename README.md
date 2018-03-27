@@ -7,7 +7,10 @@
  *      $route['select_api/find_changes'] = 'select_api/find_changes'があると確認
 1. 上の点が反映してない場合は、kevin_api_shuuseiのブランチからマージ
 2. このレポジトリを対象のサーバでclone
-3. ファイルの設定を変更
+3. gspreadというbashでgoogle spreadsheetをアクセスするモジュールをpipでインストール
+ *      sudo pip install gspread
+ *      sudo pip install --upgrade google-api-python-client
+4. ファイルの設定を変更
  *      google_login.py:
  *          ８行目　gsheet = gs.open_by_key('1c5bIqiIz8A_bT595kr_vI9fN7U1dkFDnk6Q3uwl3Tb0')　のキーを "1mRU-3NgPgayN17x-sMnWRix3-C7NiiKjaMyDIgBtO40" に変更 (PRDの場合。新たなサーバの場合は空のファイルを用意してそのキーを取っても良い）
  *      slack_post.sh:
