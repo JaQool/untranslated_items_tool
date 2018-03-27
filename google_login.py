@@ -6,7 +6,7 @@ scope = "https://spreadsheets.google.com/feeds"
 keyfile = "/home/ec2-user/untranslated_items_tool/untranslated-items-report-99371886db1e.json"
 credentials = ServiceAccountCredentials.from_json_keyfile_name(keyfile, scope)
 gs = gspread.authorize(credentials)
-gsheet = gs.open_by_key('1mRU-3NgPgayN17x-sMnWRix3-C7NiiKjaMyDIgBtO40')
+gsheet = gs.open_by_key('1c5bIqiIz8A_bT595kr_vI9fN7U1dkFDnk6Q3uwl3Tb0')
 wsheet = gsheet.worksheet("sheet1")
 input = sys.stdin.read()
 #if input == '':
