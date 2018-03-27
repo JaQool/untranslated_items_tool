@@ -23,7 +23,7 @@ shift
 
 text1='The list of untranslated items for the DEV environment has been updated. '
 text2=' Check the details here: '
-link='https://docs.google.com/spreadsheets/d/1mRU-3NgPgayN17x-sMnWRix3-C7NiiKjaMyDIgBtO40/edit?usp=sharing'
+link='https://docs.google.com/spreadsheets/d/1c5bIqiIz8A_bT595kr_vI9fN7U1dkFDnk6Q3uwl3Tb0/edit?usp=sharing'
 
 text=$text1$argument$text2$link
 
