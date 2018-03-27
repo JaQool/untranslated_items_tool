@@ -17,7 +17,7 @@ result=$(curl -X POST \
   -H 'Authorization: Basic anFfYXBpOlBIYXVjdTd1c3B1' \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
-  -d "$inputFile")
+  -d "@$inputFilename")
 
 echo $result | python -mjson.tool > "${outputFilename}"
 
