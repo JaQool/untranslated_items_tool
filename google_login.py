@@ -29,7 +29,17 @@ for index, element in enumerate(obj['result']):
     else:
         broken_projects.append(element)
     
-wsheet.update_acell('A' + str(boundary), 'PROJECTS WITH UNTRANSLATED ITEMS')
+row_a = {}
+row_b = {}
+row_c = {}
+row_d = {}
+row_e = {}
+
+#wsheet.update_cells('A' + str(boundary), counter)
+
+#wsheet.update_acell('A' + str(boundary), 'PROJECTS WITH UNTRANSLATED ITEMS')
+
+row_a[boundary] = ('PROJECTS WITH UNTRANSLATED ITEMS')
 
 if len(broken_projects) != 0:
     #get the unique project codes
@@ -51,34 +61,34 @@ if len(broken_projects) != 0:
         if (project_codes[index] is not 'repeated project code'):
             boundary += 2
             counter += 1
-            wsheet.update_acell('A' + str(boundary), counter)
-            wsheet.update_acell('B' + str(boundary), 'https://tripnscan.com/' + project_codes[index])
+            row_a[boundary] = (counter)
+            row_b[boundary] = ('https://tripnscan.com/' + project_codes[index])
             boundary += 1
-            wsheet.update_acell('B' + str(boundary), 'This project contains ' + str(len(items_in_project[project_codes[index]])) + ' untranslated items.')
+            row_b[boundary] = ('This project contains ' + str(len(items_in_project[project_codes[index]])) + ' untranslated items.')
             for item in items_in_project[project_codes[index]]:
                 boundary += 1
-                wsheet.update_acell('B' + str(boundary), item['master_name'])
+                row_b[boundary] = (item['master_name'])            
                 if item['repeats'] == 0:
                     new_items_count += 1
-                wsheet.update_acell('C' + str(boundary), 'untranslated for ' + str(item['repeats'] + 1) + ' day(s)')
-                wsheet.update_acell('D' + str(boundary), item['lang_cd'])
-                wsheet.update_acell('E' + str(boundary), format(float(item['version']), '7.2f'))
+                row_c[boundary] = ('untranslated for ' + str(item['repeats'] + 1) + ' day(s)') 
+                row_d[boundary] = (item['lang_cd'])
+                row_e[boundary] = (float(item['version'])) 
 
     boundary += 1
-    wsheet.update_acell('B' + str(boundary), 'versions guide:')
+    row_b[boundary] = ('versions guide:') 
     boundary += 1
-    wsheet.update_acell('B' + str(boundary), "1.000 and below: This item hasn't gone through 4D yet. It should be processed soon so let's hold on.")
+    row_b[boundary] = ("1.000 and below: This item hasn't gone through 4D yet. It should be processed soon so let's hold on.") 
     boundary += 1
-    wsheet.update_acell('B' + str(boundary), "1.010 - 2.000: This item went through 4D but something went wrong and it didn't get translated.") 
+    row_b[boundary] = ("1.010 - 2.000: This item went through 4D but something went wrong and it didn't get translated.")
     boundary += 1
-    wsheet.update_acell('B' + str(boundary), "Above 2.000: This version is incorrect. Something is wrong here, please report this.")
+    row_b[boundary] = ("Above 2.000: This version is incorrect. Something is wrong here, please report this.")    
 
 else:
     boundary += 2
-    wsheet.update_acell('A' + str(boundary), 'no projects found')
+    row_a[boundary] = ('no projects found')
 
 boundary += 2
-wsheet.update_acell('A' + str(boundary), 'PROJECTS WITH ITEMS FIXED TODAY')
+row_a[boundary] = ('PROJECTS WITH ITEMS FIXED TODAY')
 
 if len(fixed_projects) != 0:
     #get the unique project codes
@@ -100,31 +110,59 @@ if len(fixed_projects) != 0:
         if (project_codes[index] is not 'repeated project code'):
             boundary += 2
             counter += 1
-            wsheet.update_acell('A' + str(boundary), counter)
+            row_a[boundary] = (counter)
             wsheet.update_acell('B' + str(boundary), 'https://tripnscan.com/' + project_codes[index])
+            row_b[boundary] = ('https://tripnscan.com/' + project_codes[index])
             boundary += 1
-            wsheet.update_acell('B' + str(boundary), str(len(items_in_project[project_codes[index]])) + " of this project's items got successfully translated after having previously appeared in this list.")
+            row_b[boundary] = (" of this project's items got successfully translated after having previously appeared in this list.")
             for item in items_in_project[project_codes[index]]:
                 boundary += 1
-                wsheet.update_acell('B' + str(boundary), item['master_name'])
+                row_b[boundary] = (item['master_name'])
                 fixed_items_count += 1
-                wsheet.update_acell('C' + str(boundary), 'untranslated for ' + str(item['repeats'] + 1) + ' day(s)')
-                wsheet.update_acell('D' + str(boundary), item['lang_cd'])
-                wsheet.update_acell('E' + str(boundary), format(float(item['version']), '7.2f'))
+                row_c[boundary] = ('untranslated for ' + str(item['repeats'] + 1) + ' day(s)')
+                row_d[boundary] = (item['lang_cd'])
+                row_e[boundary] = (float(item['version']))
 
     boundary += 1
-    wsheet.update_acell('B' + str(boundary), 'versions guide:')
+    row_b[boundary] = 'versions guide:'
     boundary += 1
-    wsheet.update_acell('B' + str(boundary), '1.000 and below: This version is incorrect. Something is wrong here, please report this.') 
+    row_b[boundary] = '1.000 and below: This version is incorrect. Something is wrong here, please report this.'
     boundary += 1
-    wsheet.update_acell('B' + str(boundary), "1.010 - 2.000: This item was successfully processed by 4D.") 
+    row_b[boundary] = "1.010 - 2.000: This item was successfully processed by 4D."
     boundary += 1
-    wsheet.update_acell('B' + str(boundary), "Above 2.000: The translation was handled by the human translation team.") 
+    row_b[boundary] = "Above 2.000: The translation was handled by the human translation team."
 
 else:
     boundary += 2
-    wsheet.update_acell('A' + str(boundary), 'no projects found')
+    row_a[boundary] = 'no projects found'
 
+cell_list_a = wsheet.range("A1:A" + str(boundary))
+cell_list_b = wsheet.range("B1:B" + str(boundary))
+cell_list_c = wsheet.range("C1:C" + str(boundary))
+cell_list_d = wsheet.range("D1:D" + str(boundary))
+cell_list_e = wsheet.range("E1:E" + str(boundary))
+
+for index, cell in enumerate(cell_list_a, start=1):
+    if index in row_a:
+        cell.value = row_a[index]
+for index, cell in enumerate(cell_list_b, start=1):
+    if index in row_b:
+        cell.value = row_b[index]
+for index, cell in enumerate(cell_list_c, start=1):
+    if index in row_c:
+        cell.value = row_c[index]
+for index, cell in enumerate(cell_list_d, start=1):
+    if index in row_d:
+        cell.value = row_d[index]
+for index, cell in enumerate(cell_list_e, start=1):
+    if index in row_e:
+        cell.value = row_e[index]
+
+wsheet.update_cells(cell_list_a)
+wsheet.update_cells(cell_list_b)
+wsheet.update_cells(cell_list_c)
+wsheet.update_cells(cell_list_d)
+wsheet.update_cells(cell_list_e)
 sys.stdout.write('' + str(new_items_count) + ' new items were encountered, and ' + str(fixed_items_count) + ' previously broken items were fixed.')
 sys.stdout.flush()
 sys.exit(0)
