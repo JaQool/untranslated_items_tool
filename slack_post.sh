@@ -21,7 +21,7 @@ fi
 
 shift
 
-text1='The list of untranslated items for the PRD environment has been updated. '
+text1='The list of untranslated items for the STG environment has been updated. '
 text2=' Check the details here: '
 link='https://docs.google.com/spreadsheets/d/1mRU-3NgPgayN17x-sMnWRix3-C7NiiKjaMyDIgBtO40/edit?usp=sharing'
 
