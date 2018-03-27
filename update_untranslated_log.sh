@@ -13,7 +13,7 @@ google_script_url="/home/ec2-user/untranslated_items_tool/google_login.py"
 slack_script_url="/home/ec2-user/untranslated_items_tool/slack_post.sh"
 
 result=$(curl -X POST \
-  https://api.tripnscan.com/select_api/find_changes \
+  https://api.dev.tripnscan.com/select_api/find_changes \
   -H 'Authorization: Basic anFfYXBpOlBIYXVjdTd1c3B1' \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
