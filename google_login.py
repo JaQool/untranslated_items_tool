@@ -3,9 +3,10 @@ import sys
 import json
 from oauth2client.service_account import ServiceAccountCredentials
 scope = "https://spreadsheets.google.com/feeds"
-credentials = ServiceAccountCredentials.from_json_keyfile_name('untranslated-items-report-99371886db1e.json', scope)
+keyfile = "/home/ec2-user/untranslated_items_tool/untranslated-items-report-99371886db1e.json"
+credentials = ServiceAccountCredentials.from_json_keyfile_name(keyfile, scope)
 gs = gspread.authorize(credentials)
-gsheet = gs.open_by_key('1c5bIqiIz8A_bT595kr_vI9fN7U1dkFDnk6Q3uwl3Tb0')
+gsheet = gs.open_by_key('1mRU-3NgPgayN17x-sMnWRix3-C7NiiKjaMyDIgBtO40')
 wsheet = gsheet.worksheet("sheet1")
 input = sys.stdin.read()
 #if input == '':
@@ -23,8 +24,6 @@ wsheet.clear()
 fixed_projects = []
 broken_projects = []
 for index, element in enumerate(obj['result']):
-    print (type(element))
-    print (element['fixed_flag'])
     if element['fixed_flag'] == 1:
         fixed_projects.append(element)
     else:
